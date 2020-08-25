@@ -86,8 +86,6 @@ const Context = (props) => {
         let filterCars = allItems.filter(data => data.quantity > 0);
         setcart(filterCars)
     }
-    console.log(cart);
-
 
     const removeItem = (item, index) => {
         if (cart.length > 0) {
@@ -108,6 +106,7 @@ const Context = (props) => {
     }
 
     const clearAll = () => {
+
         if (cart.length > 0) {
             cart.forEach(x => {
                 x.quantity = 0
@@ -117,11 +116,18 @@ const Context = (props) => {
     }
 
     const decreassCart = (item, index) => {
-        const find = all.find(i => i.name === item.name)
-        find.quantity--
-        let x = [...all]
-        x.splice(find.name === item.name, 1, find)
-        setall(x)
+        if (cart.length > 0) {
+            const find = all.find(i => i.name === item.name)
+            if (find !== undefined) {
+                if (find.quantity !== undefined) {
+                    find.quantity--
+                    let x = [...all]
+                    x.splice(find.name === item.name, 1, find)
+                    setall(x)
+                }
+            }
+        }
+
     }
 
     const incressCart = (item, index) => {
@@ -133,14 +139,12 @@ const Context = (props) => {
         setall(x)
         console.log(cart);
     }
-
     return (
         <div>
             <NewContext.Provider value={{
                 cars, addToCart: addToCart,
                 cart, removeItem, clearAll,
                 toys, bag, decreassCart, incressCart,
-
             }}>
                 {props.children}
             </NewContext.Provider>

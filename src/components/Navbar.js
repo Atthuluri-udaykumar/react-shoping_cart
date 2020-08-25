@@ -17,11 +17,14 @@ const Navbartop = (props) => {
     const toggle = () => setIsOpen(!isOpen);
 
     let quantity = ""
+    let item = ""
     if (cart.length) {
         quantity = cart.reduce((sum, { quantity }) => { return sum + quantity }, 0)
+        item = cart.filter(i => i.quantity > 0);
     } else {
         quantity = 0
     }
+
 
     return (
         <div>
@@ -31,7 +34,7 @@ const Navbartop = (props) => {
                 <Collapse isOpen={isOpen} navbar>
                     <Nav className="ml-auto" navbar>
                         <NavItem >
-                            <Link className="nav-link" to="/cart">Cart<span className="bg-info p-2 text-dark h5 rounded-circle">{quantity}</span></Link>
+                            <Link className="nav-link" to="/cart">Cart<span className="bg-info p-2 text-dark h5 rounded-circle">{item.length}</span></Link>
                         </NavItem>
                     </Nav>
                 </Collapse>
