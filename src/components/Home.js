@@ -6,9 +6,11 @@ import Lamborghini from './img/Lamborghini.jpg'
 import rover from './img/range_rover.jpg'
 
 import SideNav from './SideNav'
+import { Link } from 'react-router-dom'
+
 
 const Home = () => {
-    const { cart, cars, addToCart } = useContext(NewContext)
+    const { cars, addToCart, decreassCart, incressCart } = useContext(NewContext)
 
     const images = (item) => {
         if (item.image === "Benz") {
@@ -19,9 +21,6 @@ const Home = () => {
             return Lamborghini
         }
     }
-
-
-
 
     return (
         <div className="row">
@@ -35,7 +34,16 @@ const Home = () => {
                                 <div className="card-body text-center">
                                     <h3 className="card-title text-uppercase">{item.name}</h3>
                                     <p className="card-text">${item.cost}.00</p>
-                                    <button onClick={() => addToCart(item, index)} className="btn btn-primary btn-block">add to cart</button>
+                                    {item.quantity > 0 ?
+                                        <div className="p-2">
+                                            <p className="p-0 m-0">Number Of Items Selected:- <br /><button onClick={() => decreassCart(item, index)}>-</button> {item.quantity}<button onClick={() => incressCart(item, index)}>+</button></p>
+                                            <Link to="/cart">Go to the cart to view the item :-)</Link>
+                                        </div>
+                                        : null}
+                                    <button onClick={() => {
+                                        addToCart(item, index)
+
+                                    }} className="btn btn-primary btn-block">add to cart</button>
                                 </div>
                             </div>
                         </div>

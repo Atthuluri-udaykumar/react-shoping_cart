@@ -15,7 +15,13 @@ const Navbartop = (props) => {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggle = () => setIsOpen(!isOpen);
-    const quantity = cart.reduce((sum, { quantity }) => { return sum + quantity }, 0)
+
+    let quantity = ""
+    if (cart.length) {
+        quantity = cart.reduce((sum, { quantity }) => { return sum + quantity }, 0)
+    } else {
+        quantity = 0
+    }
 
     return (
         <div>

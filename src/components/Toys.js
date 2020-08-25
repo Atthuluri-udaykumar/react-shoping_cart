@@ -5,10 +5,11 @@ import ants from './img/toy-1.jpg'
 import hen from './img/toy-2.jpg'
 import teddy from './img/toy-3.jpg'
 import SideNav from './SideNav'
+import { Link } from 'react-router-dom'
 
 
 const Toys = () => {
-    const { toys, addToCart } = useContext(NewContext)
+    const { toys, addToCart, decreassCart, incressCart } = useContext(NewContext)
 
     const images = (item) => {
         if (item.image === "ants") {
@@ -35,7 +36,15 @@ const Toys = () => {
                                 <div className="card-body text-center">
                                     <h3 className="card-title text-uppercase">{item.name}</h3>
                                     <p className="card-text">${item.cost}.00</p>
-                                    <button onClick={() => addToCart(item, index)} className="btn btn-primary btn-block">add to cart</button>
+                                    {item.quantity > 0 ?
+                                        <div className="p-2">
+                                            <p className="p-0 m-0">Number Of Items Selected:- <br /><button onClick={() => decreassCart(item, index)}>-</button> {item.quantity}<button onClick={() => incressCart(item, index)}>+</button></p>
+                                            <Link to="/cart">Go to the cart to view the item :-)</Link>
+                                        </div>
+                                        : null}
+                                    <button onClick={() => {
+                                        addToCart(item, index)
+                                    }} className="btn btn-primary btn-block">add to cart</button>
                                 </div>
                             </div>
                         </div>
