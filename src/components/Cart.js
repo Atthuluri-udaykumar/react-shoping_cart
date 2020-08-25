@@ -18,7 +18,6 @@ const Cart = () => {
     let total = ""
     if (cart.length) {
         total = cart.reduce((sum, { quantity, cost }) => { return sum + (quantity * cost) }, 0)
-
     } else {
         total = 0
     }
@@ -46,6 +45,7 @@ const Cart = () => {
             return ladies
         }
     }
+
     return (
         <div className="container p-5">
             <div className="text-center">
